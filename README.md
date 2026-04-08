@@ -90,5 +90,5 @@ npm run dev
 
 前端默认运行在 `http://localhost:5173` 。访问 /admin 进入后台管理系统。
 
-### 📜 开源协议 (License)
+## 📜 开源协议 (License)
 本项目基于 MIT License 开源，欢迎自由使用、修改和分发，但请保留原作者版权声明。
