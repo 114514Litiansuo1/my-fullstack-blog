@@ -12,9 +12,9 @@ var ctx = context.Background()
 
 func InitRedis() {
 	RDB = redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379", // Redis 地址
-		Password: "",               // 密码，没有留空
-		DB:       0,                // 默认数据库
+		Addr:     "redis:6379", // Redis 地址
+		Password: "",           // 密码，没有留空
+		DB:       0,            // 默认数据库
 	})
 
 	// 测试连接
