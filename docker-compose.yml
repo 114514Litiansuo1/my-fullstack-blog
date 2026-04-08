@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  blog-api:
+    build: ./Go-Blog-Backend
+    container_name: blog-backend
+    restart: always
+    environment:
+      - password=${BLOG_PWD} # 从宿主机环境变量读取
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    networks:
+      - blog-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: blog-redis
+    restart: always
+    networks:
+      - blog-net
+
+networks:
+  blog-net:
+    driver: bridge
