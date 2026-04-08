@@ -10,6 +10,7 @@ services:
       - "8080:8080"
     depends_on:
       - redis
+      - mysql
     networks:
       - blog-net
 
@@ -19,6 +20,24 @@ services:
     restart: always
     networks:
       - blog-net
+
+  mysql:
+    image: mysql:8.0 # 使用官方 MySQL 8.0 镜像
+    container_name: blog-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: go_blog
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql # 数据持久化,防止重启后数据丢失
+    networks:
+      - blog-net
+
+# 声明挂载卷
+volumes:
+  mysql_data:
 
 networks:
   blog-net:
