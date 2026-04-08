@@ -15,29 +15,29 @@ var DB *gorm.DB
 func DBInit() {
 
 	//connect and initialize database
-	for i := 0; i < 10; i++ {
-		db, err := gorm.Open(mysql.New(mysql.Config{
-			DSN:                       "root:123456@tcp(127.0.0.1:3306)/go_blog?charset=utf8mb4&parseTime=True&loc=Local",
-			DefaultStringSize:         256,
-			DisableDatetimePrecision:  true,
-			DontSupportRenameIndex:    true,
-			DontSupportRenameColumn:   true,
-			SkipInitializeWithVersion: false,
-		}), &gorm.Config{
-			NamingStrategy: schema.NamingStrategy{
-				SingularTable: true,
-				NoLowerCase:   false,
-			},
-			Logger: logger.Default.LogMode(logger.Warn),
-		})
 
-		if err != nil {
-			log.Fatalf("database init err: %v", err)
-		}
+	db, err := gorm.Open(mysql.New(mysql.Config{
+		DSN:                       "root:123456@tcp(127.0.0.1:3306)/go_blog?charset=utf8mb4&parseTime=True&loc=Local",
+		DefaultStringSize:         256,
+		DisableDatetimePrecision:  true,
+		DontSupportRenameIndex:    true,
+		DontSupportRenameColumn:   true,
+		SkipInitializeWithVersion: false,
+	}), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			SingularTable: true,
+			NoLowerCase:   false,
+		},
+		Logger: logger.Default.LogMode(logger.Warn),
+	})
 
-		DB = db
+	if err != nil {
+		log.Fatalf("database init err: %v", err)
 	}
-	err := DB.AutoMigrate(&model.User{}, &model.Article{}, &model.Tag{}, &model.Category{}, &model.Comment{}, &model.IPStats{})
+
+	DB = db
+
+	err = DB.AutoMigrate(&model.User{}, &model.Article{}, &model.Tag{}, &model.Category{}, &model.Comment{}, &model.IPStats{})
 	if err != nil {
 		return
 	}
