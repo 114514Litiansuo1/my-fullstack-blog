@@ -17,7 +17,7 @@ func DBInit() {
 	//connect and initialize database
 
 	db, err := gorm.Open(mysql.New(mysql.Config{
-		DSN:                       "root:123456@tcp(mysql:3306)/go_blog?charset=utf8mb4&parseTime=True&loc=Local",
+		DSN:                       "root:123456@tcp(127.0.0.1:3306:3306)/go_blog?charset=utf8mb4&parseTime=True&loc=Local",
 		DefaultStringSize:         256,
 		DisableDatetimePrecision:  true,
 		DontSupportRenameIndex:    true,
