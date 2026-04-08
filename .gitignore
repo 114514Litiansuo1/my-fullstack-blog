@@ -1,0 +1,19 @@
+# === 前端忽略 ===
+Go-Blog-Frontend/node_modules/
+Go-Blog-Frontend/dist/
+Go-Blog-Frontend/.env.local
+
+# === 后端忽略 ===
+Go-Blog-Backend/uploads/     # 绝对不要把测试上传的图片推上去！
+Go-Blog-Backend/blog-app.exe # 忽略编译出的可执行文件 (Windows)
+Go-Blog-Backend/blog-app     # 忽略编译出的可执行文件 (Mac/Linux)
+Go-Blog-Backend/.continue
+Go-Blog-Backend/.idea
+Go-Blog-Backend/newrepo
+*.log
+
+# === 通用/配置忽略 ===
+.DS_Store
+.vscode/
+.idea/
+# ⚠️ 如果你的后端有包含数据库密码、Redis 密码的配置文件 (如 config.yaml 或 .env)，一定要在这里忽略掉！
