@@ -18,7 +18,7 @@ func SetupRouter() *gin.Engine {
 	v1 := r.Group("/api/v1")
 	{
 		// Alert!!! Delete register API if deploy into the server
-		v1.POST("/register", controller.Register)
+		// v1.POST("/register", controller.Register)
 		v1.POST("/login", middleware.LoginRateLimiter(), controller.Login)
 
 		// Articles Tags and Categories
