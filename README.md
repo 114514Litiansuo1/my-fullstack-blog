@@ -97,5 +97,11 @@ docker-compose up -d --build
 ## ⚠️ 注意事项 5：Caddy配置
 修改Caddyfile，写上你的域名。
 
+## ⚠️ 注意事项 6：在使用docker运行之前，前端需要进行编译
+切换到Go-Blog-Frontend后进行编译：
+```bash
+cd /Go-Blog-Frontend
+npm run build
+```
 ## 📜 开源协议 (License)
 本项目基于 MIT License 开源，欢迎自由使用、修改和分发，但请保留原作者版权声明。
