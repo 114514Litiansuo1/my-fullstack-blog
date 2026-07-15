@@ -100,7 +100,7 @@ docker-compose up -d --build
 ## ⚠️ 注意事项 6：在使用docker运行之前，前端需要进行编译
 切换到Go-Blog-Frontend后进行编译：
 ```bash
-cd /Go-Blog-Frontend
+cd Go-Blog-Frontend
 npm run build
 ```
 ## 📜 开源协议 (License)
