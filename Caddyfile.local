@@ -1,0 +1,14 @@
+# 显式指定 http://localhost，这样 Caddy 就不会去强行申请公网 HTTPS 证书了
+http://localhost:80 {
+    # 转发 API 请求到后端的 8080 端口
+    handle /api/v1/* {
+        reverse_proxy blog-api:8080
+    }
+
+    # 托管前端 Vue 打包后的静态文件
+    handle {
+        root * /srv/dist
+        file_server
+        try_files {path} {path}/ /index.html
+    }
+}

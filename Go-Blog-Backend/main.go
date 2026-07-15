@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-
 	// database initialize
 	database.DBInit()
 
@@ -27,14 +26,14 @@ func main() {
 	database.DB.FirstOrCreate(&model.User{}, &model.User{
 		Username: "admin",
 		Password: pwd,
-		Email:    "user@example.com",
+		Email:    "Karl@example.com",
 		Id:       id,
 	})
 
 	model.InitRedis()
 
 	// router initialize
-	err = router.SetupRouter().Run("localhost:8080")
+	err = router.SetupRouter().Run("blog-api:8080")
 	if err != nil {
 		log.Fatalf("[Error]: %v", err)
 	}

@@ -6,8 +6,6 @@ services:
     restart: always
     environment:
       - password=${BLOG_PWD} # 从宿主机环境变量读取
-    ports:
-      - "8080:8080"
     depends_on:
       - redis
       - mysql
@@ -32,6 +30,21 @@ services:
       - "127.0.0.1:3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql # 数据持久化,防止重启后数据丢失
+    networks:
+      - blog-net
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: blog-caddy
+    restart: always
+    ports:
+      - "443:443" # 如果 用了 Cloudflare，只开放 443 即可
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile    # 挂载配置文件
+      - ./certs:/etc/caddy/certs            # 挂载证书
+      - ./dist:/srv/dist                    # 挂载前端静态文件
+    depends_on:
+      - blog-api
     networks:
       - blog-net
 

@@ -1,0 +1,18 @@
+your-blog.com, www.your-blog.com {
+    # 1. 指定你的证书路径 (这里的路径是 Docker 容器内部的路径)
+    tls /etc/caddy/certs/cert.pem /etc/caddy/certs/key.pem
+
+    # 2. 动态 API 路由：将 /api/v1 开头的请求转发给 Go 后端
+    # ⚠️ 关键点：这里不写 127.0.0.1，而是写 docker-compose 里的服务名 blog-api
+    handle /api/v1/* {
+        reverse_proxy blog-api:8080
+    }
+
+    # 3. 静态前端路由：接管其他所有普通网页访问
+    handle {
+        root * /srv/dist
+        file_server
+        # 解决 Vue Router 刷新页面报 404 的问题
+        try_files {path} {path}/ /index.html
+    }
+}

@@ -30,7 +30,7 @@ const handleLogin = async () => {
       loading.value = true
       try {
         // 向后端发送 POST 请求
-        const response = await request.post('http://localhost:8080/api/v1/login', {
+        const response = await request.post('/login', {
           username: loginForm.username,
           password: loginForm.password,
         })

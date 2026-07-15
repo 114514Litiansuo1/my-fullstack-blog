@@ -1,0 +1,56 @@
+version: '3.8'
+services:
+  blog-api:
+    build: ./Go-Blog-Backend
+    container_name: local-blog-backend
+    restart: always
+    environment:
+      # 本地测试密码，随便填
+      - password=LocalTestPassword123
+    depends_on:
+      - redis
+      - mysql
+    networks:
+      - blog-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: local-blog-redis
+    networks:
+      - blog-net
+
+  mysql:
+    image: mysql:8.0
+    container_name: local-blog-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: go_blog
+    # 本地测试为了方便用 Navicat 查看，可以把 3306 暴露出来
+    ports:
+      - "3306:3306"
+    volumes:
+      - local_mysql_data:/var/lib/mysql
+    networks:
+      - blog-net
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: local-blog-caddy
+    ports:
+      # 本地只需要映射 80 端口
+      - "80:80"
+    volumes:
+      # 👇 注意这里：挂载的是本地特供版的 Caddyfile.local
+      - ./Caddyfile.local:/etc/caddy/Caddyfile
+      - ./dist:/srv/dist
+    depends_on:
+      - blog-api
+    networks:
+      - blog-net
+
+volumes:
+  local_mysql_data:
+
+networks:
+  blog-net:
+    driver: bridge

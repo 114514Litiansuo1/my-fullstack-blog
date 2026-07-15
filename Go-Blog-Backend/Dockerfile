@@ -2,9 +2,11 @@
 FROM golang:1.26-alpine AS builder
 WORKDIR /app
 COPY . .
+ENV GOPROXY=https://goproxy.cn,direct
+ENV CGO_ENABLED=0
 RUN go mod download
 # 编译可执行文件
-RUN go build -o main .
+RUN go build -p 4 -o main .
 
 # 阶段 2: 运行阶段 (最小化镜像)
 FROM alpine:latest
