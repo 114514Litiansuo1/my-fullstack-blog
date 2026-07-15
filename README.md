@@ -81,14 +81,27 @@ go run main.go
 
 后端默认运行在 `http://localhost:8080`
 
-### 3. 前端配置与启动
-打开一个新的终端，进入 `frontend` 目录：
+## ⚠️ 注意事项 4：必须使用docker运行
+在本地测试：
 ```bash
-npm install
-npm run dev
+docker-compose -f docker-compose.local.yml up -d --build
 ```
+前端运行在`http://localhost:5173`。
 
+服务端运行：
+```
+docker-compose up -d --build
+```
 前端默认运行在 `http://localhost:5173` 。访问 /admin 进入后台管理系统。
 
+## ⚠️ 注意事项 5：Caddy配置
+修改Caddyfile，写上你的域名。
+
+## ⚠️ 注意事项 6：在使用docker运行之前，前端需要进行编译
+切换到Go-Blog-Frontend后进行编译：
+```bash
+cd Go-Blog-Frontend
+npm run build
+```
 ## 📜 开源协议 (License)
 本项目基于 MIT License 开源，欢迎自由使用、修改和分发，但请保留原作者版权声明。
