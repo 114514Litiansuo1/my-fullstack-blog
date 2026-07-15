@@ -42,7 +42,7 @@ services:
     volumes:
       # 👇 注意这里：挂载的是本地特供版的 Caddyfile.local
       - ./Caddyfile.local:/etc/caddy/Caddyfile
-      - ./dist:/srv/dist
+      - ./Go-Blog-Frontend/dist:/srv/dist
     depends_on:
       - blog-api
     networks:

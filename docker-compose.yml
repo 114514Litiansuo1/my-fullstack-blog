@@ -42,7 +42,7 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile    # 挂载配置文件
       - ./certs:/etc/caddy/certs            # 挂载证书
-      - ./dist:/srv/dist                    # 挂载前端静态文件
+      - ./Go-Blog-Frontend/dist:/srv/dist                    # 挂载前端静态文件
     depends_on:
       - blog-api
     networks:
